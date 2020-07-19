@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>Pagina de Login</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="submit" method="POST">{% csrf_token %}
-        <div align="center">
-            <label>Usuário:</label>
-            <input type="text" name="username">
-
-            <label>Senha:</label>
-            <input type="password" name="password">
-
-            <button type="submit">Entrar</button>
-        </div>
-    </form>
-
+    <div id="content" align="center">
+        <h1>Login</h1>
+        <form action="submit" method="POST">{% csrf_token %}
+            <div id="divuser">
+                <label>Usuário:</label>
+                <input type="text" name="username">
+                <br>
+                <label>Senha:</label>
+                <input type="password" name="password">
+                <br>
+                <br>
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+    </div>
     {% for message in messages %}
-        <div align="center">
+        <div align="center" id="divmessage">
             <strong>Erro: </strong>{{ message }}
         </div>
     {% endfor %}
