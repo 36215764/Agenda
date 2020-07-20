@@ -2,7 +2,9 @@
 
 {% block content %}
     <h2>Seus agendamentos</h2>
-
+    <a href="evento/">
+        <button type="button">Criar agendamento</button>
+    </a>
     <ul style="font-size: 18px">
     {% for evento in eventos %}
         <li>{{ evento.titulo }} - {{ evento.get_data_evento }}</li>
