@@ -2,22 +2,32 @@
 
 {% block content %}
     <h2>Seus agendamentos</h2>
-    <a href="evento/">
+    <a href="evento/" style="text-decoration: none">
         <button type="button">Criar agendamento</button>
     </a>
-    <ul style="font-size: 18px">
+    <a href="historico/" style="text-decoration: none">
+        <button type="button">Agendamentos terminados</button>
+    </a>
+    <ul class="itens">
     {% for evento in eventos %}
-        <li>
+
             <div style={% if evento.get_evento_atrasado %}
                         "color:red"
-                        {% endif %}>
-
-                {{ evento.titulo }} - {{ evento.get_data_evento }}
-                ( Local: {{ evento.local }} )
-                -<a href="evento/?id={{ evento.id }}"> Editar </a>
-                /<a href="evento/delete/{{ evento.id }}/"> Excluir </a>
+                        {% elif evento.get_evento_terminando %}
+                        "color:yellow"
+                        {% else %}
+                        "color:balck"
+                        {% endif %} id="items_agenda">
+                <li>
+                    {{ evento.titulo }} - {{ evento.get_data_evento }}
+                    ( Local: {{ evento.local }} )
+                    <div id="buttons" align="right">
+                        <a href="evento/?id={{ evento.id }}" class="edit"> Editar </a>
+                        <a href="evento/delete/{{ evento.id }}/" class="delet"> Excluir </a>
+                    </div>
+                </li>
             </div>
-        </li>
+
     {% endfor %}
     </ul>
 {% endblock %}

@@ -98,3 +98,23 @@ def json_lista_evento(request, id_usuario):
     evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
     #dados = {'eventos': evento}
     return JsonResponse(list(evento), safe=False)
+
+@login_required(login_url='/login/')
+def historico(request):
+    usuario = request.user
+    data_atual = datetime.now() - timedelta(hours=1)
+    evento = Evento.objects.filter(usuario=usuario,
+                                   data_evento__lt=data_atual)
+    dados = {'eventos': evento}
+
+
+    return render(request ,'historico.html', dados)
+
+@login_required(login_url='/login/')
+def limpar_historico(request):
+    usuario = request.user
+    data_atual = datetime.now() - timedelta(hours=1)
+    evento = Evento.objects.filter(usuario=usuario,
+                                   data_evento__lt=data_atual)
+    evento.delete()
+    return redirect('/')

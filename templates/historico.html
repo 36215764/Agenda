@@ -1,0 +1,15 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<a href="limpar/">
+    <button type="button">Limpar Histórico</button>
+</a>
+
+<ul>
+    {% for evento in eventos %}
+        <li> {{ evento.titulo }} - {{ evento.data_evento }} </li>
+    {% endfor %}
+</ul>
+
+<a href="/">Voltar</a>
+{% endblock %}
